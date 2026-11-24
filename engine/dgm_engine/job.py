@@ -227,7 +227,7 @@ def _readme(cfg, tiles, plan, extents, covered, missing, total_req, mosaic,
     ver = __version__
     now = _dt.datetime.now(_dt.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')
     lines = [
-        'KAGIS DGM to DXF export',
+        'TerraTech export',
         f'Generated: {now} by dgm-engine {ver}',
         '',
         'SOURCE',

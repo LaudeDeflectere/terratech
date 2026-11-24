@@ -1,6 +1,6 @@
 {
-  "name": "kagis-dgm-to-dxf",
-  "productName": "KAGIS DGM to DXF",
+  "name": "terratech",
+  "productName": "TerraTech",
   "version": "1.0.0",
   "description": "Convert official KAGIS DGM GeoTIFF elevation tiles to AutoCAD DXF (contours, points, TIN).",
   "private": true,
@@ -20,8 +20,8 @@
     "electron-builder": "26.18.0"
   },
   "build": {
-    "appId": "local.kagis.dgm2dxf",
-    "productName": "KAGIS DGM to DXF",
+    "appId": "local.terratech.app",
+    "productName": "TerraTech",
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "directories": {
       "output": "dist",

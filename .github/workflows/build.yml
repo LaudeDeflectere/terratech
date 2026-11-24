@@ -58,7 +58,7 @@ jobs:
       - name: Upload Windows build
         uses: actions/upload-artifact@v4
         with:
-          name: kagis-dgm-to-dxf-windows
+          name: terratech-windows
           path: |
             app/dist/*.exe
             app/dist/*.blockmap

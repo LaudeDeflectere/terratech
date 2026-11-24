@@ -1,6 +1,6 @@
-# KAGIS DGM to DXF
+# TerraTech
 
-A desktop application (Electron, Windows first, Linux supported) that converts
+TerraTech is a desktop application (Electron, Windows first, Linux supported) that converts
 official **KAGIS DGM** elevation GeoTIFF tiles (`dgm_*.tif`, EPSG:31258) into
 ASCII **AutoCAD R12 DXF** files for AutoCAD and Civil 3D:
 

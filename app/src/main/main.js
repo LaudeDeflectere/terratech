@@ -31,7 +31,7 @@ function createWindow() {
     height: 860,
     minWidth: 980,
     minHeight: 680,
-    title: 'KAGIS DGM to DXF',
+    title: 'TerraTech',
     backgroundColor: '#f5f6f8',
     webPreferences: {
       preload: PRELOAD,

@@ -70,7 +70,7 @@ def cmd_convert(config_path: str) -> int:
 
 
 def main(argv=None) -> int:
-    p = argparse.ArgumentParser(prog='dgm-engine', description='KAGIS DGM to DXF engine')
+    p = argparse.ArgumentParser(prog='dgm-engine', description='TerraTech engine')
     p.add_argument('--version', action='version', version=__version__)
     sub = p.add_subparsers(dest='cmd', required=True)
     pi = sub.add_parser('inspect', help='validate tiles and print metadata as JSON')
