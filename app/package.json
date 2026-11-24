@@ -1,0 +1,59 @@
+{
+  "name": "kagis-dgm-to-dxf",
+  "productName": "KAGIS DGM to DXF",
+  "version": "1.0.0",
+  "description": "Convert official KAGIS DGM GeoTIFF elevation tiles to AutoCAD DXF (contours, points, TIN).",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/validation.test.js",
+    "test:e2e": "electron test/e2e/smoke.js",
+    "build:engine": "node ../engine/build_engine.js",
+    "dist:win": "electron-builder --win --x64",
+    "dist:linux": "electron-builder --linux AppImage --x64",
+    "dist:dir": "electron-builder --dir"
+  },
+  "devDependencies": {
+    "electron": "45.4.1",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "local.kagis.dgm2dxf",
+    "productName": "KAGIS DGM to DXF",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../engine/dist/dgm-engine",
+        "to": "engine",
+        "filter": ["**/*"]
+      }
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "category": "Utility"
+    }
+  }
+}

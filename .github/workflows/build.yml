@@ -1,0 +1,66 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test-and-build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install engine dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r engine/requirements.txt -r engine/requirements-test.txt
+
+      - name: Engine tests (synthetic data)
+        working-directory: engine
+        run: python -m pytest -q
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: App unit tests
+        working-directory: app
+        run: |
+          npm ci --ignore-scripts
+          npm test
+
+      - name: Build the bundled engine (PyInstaller)
+        working-directory: engine
+        env:
+          DGM_PYTHON: python
+        run: node build_engine.js
+
+      - name: Smoke-test the bundled engine
+        shell: pwsh
+        run: |
+          engine\dist\dgm-engine\dgm-engine.exe --version
+          engine\dist\dgm-engine\dgm-engine.exe inspect -- does_not_exist.tif
+
+      - name: Build the Windows installer and portable app
+        working-directory: app
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npx electron-builder --win --x64 --publish never
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v4
+        with:
+          name: kagis-dgm-to-dxf-windows
+          path: |
+            app/dist/*.exe
+            app/dist/*.blockmap
+          if-no-files-found: error
+          retention-days: 30

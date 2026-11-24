@@ -1,0 +1,23 @@
+# Large inputs and generated outputs: never commit these
+*.tif
+*.tiff
+*.dxf
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+engine/build/
+engine/dist/
+engine/*.egg-info/
+.venv/
+
+# Node / Electron
+app/node_modules/
+app/dist/
+app/out/
+
+# Local settings
+.env
+.claude/settings.local.json

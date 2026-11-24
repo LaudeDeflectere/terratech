@@ -1,0 +1,5 @@
+# Runtime dependencies of the conversion engine (bundled by PyInstaller).
+numpy>=1.26,<3
+rasterio>=1.4,<2
+contourpy>=1.2,<2
+shapely>=2.0,<3
