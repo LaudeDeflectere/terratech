@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    AutoCAD 2023 plug-in. AutoCAD 2023 runs on .NET Framework 4.8 and is 64-bit,
+    so the target is net48 / x64. The Autodesk assemblies are compile-time only
+    (ExcludeAssets="runtime"): AutoCAD provides them when it loads the plug-in.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <AssemblyName>KagisVermessung</AssemblyName>
+    <RootNamespace>KagisVermessung</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Version>1.0.0</Version>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- AutoCAD 2023 API (AutoCAD.NET 23.1.0 = AutoCAD 2023) -->
+    <PackageReference Include="AutoCAD.NET" Version="23.1.0" ExcludeAssets="runtime" />
+    <PackageReference Include="AutoCAD.NET.Core" Version="23.1.0" ExcludeAssets="runtime" />
+    <PackageReference Include="AutoCAD.NET.Model" Version="23.1.0" ExcludeAssets="runtime" />
+    <!-- Embedded Edge WebView2 control for the KAGIS map -->
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+    <!-- .NET Framework 4.8 reference assemblies, so the project also builds on non-Windows machines -->
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kagis.Core\Kagis.Core.csproj" />
+  </ItemGroup>
+
+  <!--
+    Builds an AutoCAD bundle after every Release build:
+      bin/Release/KagisVermessung.bundle/PackageContents.xml
+      bin/Release/KagisVermessung.bundle/Contents/   (plug-in DLLs, WebView2 loader)
+      bin/Release/KagisVermessung.bundle/Contents/engine/   (dgm-engine, if it was built)
+    Copy the bundle folder to %APPDATA%/Autodesk/ApplicationPlugins/ to install it.
+  -->
+  <PropertyGroup>
+    <BundleDir>$(MSBuildProjectDirectory)/bin/$(Configuration)/KagisVermessung.bundle/</BundleDir>
+    <EngineDistDir>$(MSBuildProjectDirectory)/../../engine/dist/dgm-engine/</EngineDistDir>
+  </PropertyGroup>
+  <Target Name="KagisBundle" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <BundleFiles Include="$(OutDir)KagisVermessung.dll;$(OutDir)Kagis.Core.dll;$(OutDir)Newtonsoft.Json.dll;$(OutDir)Microsoft.Web.WebView2.Core.dll;$(OutDir)Microsoft.Web.WebView2.WinForms.dll" />
+      <BundleLoader Include="$(OutDir)runtimes/win-x64/native/WebView2Loader.dll" />
+    </ItemGroup>
+    <!-- Only a Windows engine is bundled. A Linux build of the engine is never copied. -->
+    <ItemGroup Condition="Exists('$(EngineDistDir)dgm-engine.exe')">
+      <BundleEngine Include="$(EngineDistDir)**/*" />
+    </ItemGroup>
+    <RemoveDir Directories="$(BundleDir)" />
+    <Copy SourceFiles="@(BundleFiles)" DestinationFolder="$(BundleDir)Contents" />
+    <Copy SourceFiles="@(BundleLoader)" DestinationFolder="$(BundleDir)Contents" Condition="Exists('%(FullPath)')" />
+    <Copy SourceFiles="@(BundleEngine)" DestinationFiles="@(BundleEngine->'$(BundleDir)Contents/engine/%(RecursiveDir)%(Filename)%(Extension)')" Condition="Exists('$(EngineDistDir)dgm-engine.exe')" />
+    <Warning Text="No Windows engine found at $(EngineDistDir). The bundle has no engine; build engine/build_engine.js on Windows." Condition="!Exists('$(EngineDistDir)dgm-engine.exe')" />
+    <Copy SourceFiles="Bundle/PackageContents.xml" DestinationFolder="$(BundleDir)" />
+    <Message Importance="high" Text="AutoCAD bundle written to $(BundleDir)" />
+  </Target>
+</Project>

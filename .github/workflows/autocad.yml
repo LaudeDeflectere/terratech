@@ -1,0 +1,59 @@
+name: autocad-plugin
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  kagisvermessung-2023:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Unit tests (Kagis.Core)
+        run: dotnet test autocad/Kagis.Core.Tests/Kagis.Core.Tests.csproj -c Release
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build the bundled engine (PyInstaller)
+        working-directory: engine
+        env:
+          DGM_PYTHON: python
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt -r requirements-test.txt
+          node build_engine.js
+
+      - name: Build the AutoCAD 2023 bundle
+        run: dotnet build autocad/KagisVermessung/KagisVermessung.csproj -c Release
+
+      - name: Check the bundle layout
+        shell: pwsh
+        run: |
+          $b = "autocad\KagisVermessung\bin\Release\KagisVermessung.bundle"
+          foreach ($f in @("PackageContents.xml", "Contents\KagisVermessung.dll", "Contents\Kagis.Core.dll",
+                           "Contents\Newtonsoft.Json.dll", "Contents\WebView2Loader.dll",
+                           "Contents\engine\dgm-engine.exe")) {
+            if (-not (Test-Path (Join-Path $b $f))) { throw "Missing $f in the bundle" }
+          }
+          Compress-Archive -Path $b -DestinationPath "KagisVermessung-2023-bundle.zip" -Force
+
+      - name: Upload the bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: KagisVermessung-2023-bundle
+          path: KagisVermessung-2023-bundle.zip
+          if-no-files-found: error
+          retention-days: 30

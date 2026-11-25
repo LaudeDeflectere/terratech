@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  AutoCAD bundle for KagisVermessung (AutoCAD 2023 / R23.1 only).
+  Copy the folder KagisVermessung.bundle to:
+    %APPDATA%\Autodesk\ApplicationPlugins\
+  AutoCAD loads it at start-up. Type KAGISVERMESSUNG in the command line.
+-->
+<ApplicationPackage SchemaVersion="1.0"
+    AutodeskProduct="AutoCAD"
+    ProductType="Application"
+    Name="KagisVermessung"
+    Description="Höhenlinien aus den KAGIS DGM-Kacheln in die Zeichnung einfügen"
+    AppVersion="1.0.0"
+    Author="TerraTech"
+    ProductCode="{0B9ADFE6-8C99-4129-9C87-13536A606127}"
+    UpgradeCode="{D030A1DF-7FD4-4144-847A-D5EE729E5B52}">
+  <CompanyDetails Name="TerraTech" Phone="" Url="" Email="" />
+  <Components Description="KagisVermessung for AutoCAD 2023">
+    <RuntimeRequirements OS="Win64" Platform="AutoCAD" SeriesMin="R23.1" SeriesMax="R23.1" />
+    <ComponentEntry AppName="KagisVermessung"
+        Version="1.0.0"
+        ModuleName="./Contents/KagisVermessung.dll"
+        AppType=".Net"
+        AppDescription="KAGISVERMESSUNG: Höhenlinien aus KAGIS DGM"
+        LoadOnAutoCADStartup="True" />
+  </Components>
+</ApplicationPackage>
