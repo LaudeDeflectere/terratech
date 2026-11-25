@@ -1,0 +1,217 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "stac_version": "1.0.0",
+   "id": "5217-5302b",
+   "properties": {
+    "proj:epsg": 31258,
+    "datetime": "2015-03-01T00:00:00Z"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.197087210648693,
+       46.58730466108645
+      ],
+      [
+       14.213395322062901,
+       46.58718077090019
+      ],
+      [
+       14.2135767596872,
+       46.59842414842094
+      ],
+      [
+       14.197265276129219,
+       46.59854808707011
+      ],
+      [
+       14.197087210648693,
+       46.58730466108645
+      ]
+     ]
+    ]
+   },
+   "links": [
+    {
+     "rel": "root",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/",
+     "type": "application/json",
+     "title": "KAGIS STAC Katalog"
+    },
+    {
+     "rel": "self",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/collections/KAGIS_coll_ALS1/items/5217-5302b",
+     "type": "application/json"
+    },
+    {
+     "rel": "collection",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/collections/KAGIS_coll_ALS1",
+     "type": "application/json",
+     "title": "ALS 1 Höhenraster Kärnten"
+    },
+    {
+     "rel": "parent",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/collections/KAGIS_coll_ALS1",
+     "type": "application/json",
+     "title": "ALS 1 Höhenraster Kärnten"
+    }
+   ],
+   "assets": {
+    "dom_5217-5302b": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dom_5217-5302b.tif",
+     "type": "image/tiff; application=geotiff",
+     "title": "5217-5302b_Digitales_Oberflaechenmodell",
+     "roles": [
+      "data"
+     ]
+    },
+    "dom_5217-5302b_thumbnail": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dom_5217-5302b_thumbnail.png",
+     "type": "image/png",
+     "title": "dom_5217-5302b_thumbnail",
+     "roles": [
+      "thumbnail"
+     ]
+    },
+    "dgm_5217-5302b": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dgm_5217-5302b.tif",
+     "type": "image/tiff; application=geotiff",
+     "title": "5217-5302b_Digitales_Gelaendemodell",
+     "roles": [
+      "data"
+     ]
+    },
+    "dgm_5217-5302b_thumbnail": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dgm_5217-5302b_thumbnail.png",
+     "type": "image/png",
+     "title": "dgm_5217-5302b_thumbnail",
+     "roles": [
+      "thumbnail"
+     ]
+    }
+   },
+   "bbox": [
+    14.197087210648693,
+    46.58718077090019,
+    14.2135767596872,
+    46.59854808707011
+   ],
+   "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+   ],
+   "collection": "KAGIS_coll_ALS1"
+  },
+  {
+   "type": "Feature",
+   "stac_version": "1.0.0",
+   "id": "5217-5303a",
+   "properties": {
+    "proj:epsg": 31258,
+    "datetime": "2015-03-01T00:00:00Z"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       14.213395322062901,
+       46.58718077090019
+      ],
+      [
+       14.229703324678933,
+       46.58705455626489
+      ],
+      [
+       14.229888134365638,
+       46.59829788441513
+      ],
+      [
+       14.2135767596872,
+       46.59842414842094
+      ],
+      [
+       14.213395322062901,
+       46.58718077090019
+      ]
+     ]
+    ]
+   },
+   "links": [
+    {
+     "rel": "root",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/",
+     "type": "application/json",
+     "title": "KAGIS STAC Katalog"
+    },
+    {
+     "rel": "self",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/collections/KAGIS_coll_ALS1/items/5217-5303a",
+     "type": "application/json"
+    },
+    {
+     "rel": "collection",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/collections/KAGIS_coll_ALS1",
+     "type": "application/json",
+     "title": "ALS 1 Höhenraster Kärnten"
+    },
+    {
+     "rel": "parent",
+     "href": "https://gis.ktn.gv.at/api/stac/v1/collections/KAGIS_coll_ALS1",
+     "type": "application/json",
+     "title": "ALS 1 Höhenraster Kärnten"
+    }
+   ],
+   "assets": {
+    "dom_5217-5303a": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dom_5217-5303a.tif",
+     "type": "image/tiff; application=geotiff",
+     "title": "5217-5303a_Digitales_Oberflaechenmodell",
+     "roles": [
+      "data"
+     ]
+    },
+    "dom_5217-5303a_thumbnail": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dom_5217-5303a_thumbnail.png",
+     "type": "image/png",
+     "title": "dom_5217-5303a_thumbnail",
+     "roles": [
+      "thumbnail"
+     ]
+    },
+    "dgm_5217-5303a": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dgm_5217-5303a.tif",
+     "type": "image/tiff; application=geotiff",
+     "title": "5217-5303a_Digitales_Gelaendemodell",
+     "roles": [
+      "data"
+     ]
+    },
+    "dgm_5217-5303a_thumbnail": {
+     "href": "https://gis.ktn.gv.at/ogd/Hoehe/als/dgm_5217-5303a_thumbnail.png",
+     "type": "image/png",
+     "title": "dgm_5217-5303a_thumbnail",
+     "roles": [
+      "thumbnail"
+     ]
+    }
+   },
+   "bbox": [
+    14.213395322062901,
+    46.58705455626489,
+    14.229888134365638,
+    46.59842414842094
+   ],
+   "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+   ],
+   "collection": "KAGIS_coll_ALS1"
+  }
+ ],
+ "numberMatched": 8,
+ "numberReturned": 8
+}
